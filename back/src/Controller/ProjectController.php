@@ -45,7 +45,6 @@ class ProjectController extends AbstractController
 
     #[Route('/api/projects', methods: ['POST'])]
     public function createProject(Request $request) {
-
         if(!in_array("ADMIN", $this->user->getRoles())) {
             throw new UserNotAllowedException();
         }
@@ -60,7 +59,6 @@ class ProjectController extends AbstractController
 
     #[Route('/api/projects/{id}', methods: ['PUT'])]
     public function updateProject(Request $request, $id) {
-
         if(!in_array("ADMIN", $this->user->getRoles())) {
             throw new UserNotAllowedException();
         }
@@ -75,7 +73,6 @@ class ProjectController extends AbstractController
 
     #[Route('/api/projects/{id}', methods: ['DELETE'])]
     public function deleteProject($id) {
-
         if(!in_array("ADMIN", $this->user->getRoles())) {
             throw new UserNotAllowedException();
         }
