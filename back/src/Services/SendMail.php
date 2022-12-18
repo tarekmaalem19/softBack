@@ -19,18 +19,20 @@ class SendMail
         $this->mailer = $mailer;
     }
 
-   public function send($message, $reciver) {
-       $email = (new Email())
-           ->from('hello@example.com')
-           ->to('you@example.com')
-           //->cc('cc@example.com')
-           //->bcc('bcc@example.com')
-           //->replyTo('fabien@example.com')
-           //->priority(Email::PRIORITY_HIGH)
-           ->subject('Time for Symfony Mailer!')
-           ->text('Sending emails is fun again!')
-           ->html('<p>See Twig integration for better HTML integration!</p>');
+    public function send($payload)
+    {
+        try {
+            $email = (new Email())
+                ->from($payload['from'])
+                ->to($payload['to'])
+                ->subject($payload['subject'])
+                ->text($payload['text'])
+                ->html($payload['html']);
 
-       $this->mailer->send($email);
-   }
+            $this->mailer->send($email);
+
+        } catch (\Exception $exception) {
+            throw new \Exception($exception);
+        }
+    }
 }
